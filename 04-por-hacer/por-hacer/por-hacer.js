@@ -32,9 +32,8 @@ const crear = (descripcion) => {
     };
 
     listadoPorHacer.push(porHacer);
-
+    
     guardarDB();
-
     return porHacer;
 }
 
