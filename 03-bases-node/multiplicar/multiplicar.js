@@ -43,14 +43,9 @@ let crearArchivo = (base, limite = 10) => {
 
         fs.writeFile(`tablas/table-${base}_lim-${limite}.txt`, data, (err) => {
             if(err) reject(err)
-            else
-                resolve(`table-${base}_lim-${limite}.txt`);
+            else resolve(`table-${base}_lim-${limite}.txt`);
         });
-
     });
 }
 
-module.exports = {
-    crearArchivo,
-    listarTabla
-}
+module.exports = { crearArchivo, listarTabla }

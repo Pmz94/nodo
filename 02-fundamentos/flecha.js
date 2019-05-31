@@ -12,13 +12,23 @@
 
 //console.log(saludar('Pedro'));
 
-let deadpool = {
-    nombre: 'Wade',
-    apellido: 'Winston',
-    poder: 'Regeneracion',
-    getNombre() {
-        return `${this.nombre} ${this.apellido} - poder: ${this.poder}`;
-    }
-};
+let superheroes = {
+    deadpool: {
+        nombre: 'Wade',
+        apellido: 'Winston',
+        poder: 'Regeneracion',
+        getNombre() {
+            return `${this.nombre} ${this.apellido} - poder: ${this.poder}`;
+        }
+    },
+    ironman: {
+        nombre: 'Tony',
+        apellido: 'Stark',
+        poder: 'Varios',
+        getNombre() {
+            return `${this.nombre} ${this.apellido} - poder: ${this.poder}`;
+        }
+    },
+}
 
-console.log(deadpool.getNombre());
+console.log(superheroes.ironman.getNombre());

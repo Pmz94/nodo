@@ -1,11 +1,13 @@
 const opciones = {
     base: {
         demand: true,
-        alias: 'b'
+        alias: 'b',
+        desc: 'Numero de cual sera la tabla'
     },
     limite: {
         alias: 'l',
-        default: 10
+        default: 10,
+        desc: 'Numero de hasta donde se multiplicara'
     }
 };
 
@@ -15,6 +17,4 @@ const argv = require('yargs')
     .help()
     .argv;
 
-module.exports = {
-    argv
-}
+module.exports = { argv }

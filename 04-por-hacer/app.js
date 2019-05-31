@@ -10,7 +10,8 @@ switch(comando.toLowerCase()) {
     case 'crear':
         let tarea = porHacer.crear(argv.descripcion);
         console.log('');
-        console.log(`Tarea "${tarea.descripcion}" creada!`.green);
+        if(tarea) console.log(`Tarea "${tarea.descripcion}" creada!`.green);
+        else console.log('No se pudo crear esta tarea, ya esta agregada!'.red);
         break;
     case 'listar':
         let listado = porHacer.getListado();
@@ -24,7 +25,7 @@ switch(comando.toLowerCase()) {
         break;
     case 'actualizar':
         let actualizado = porHacer.actualizar(argv.descripcion, argv.completado);
-        if(actualizado) console.log(`Tarea actualizada!`.green);
+        if(actualizado) console.log(`Tarea actualizada a ${argv.completado}!`.green);
         break;
     case 'borrar':
         let borrado = porHacer.borrar(argv.descripcion);
