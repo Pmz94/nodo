@@ -10,14 +10,10 @@ const cargarDB = () => {
     }
 }
 
-const validar = () => {
-
-}
-
 const guardarDB = () => {
     let data = JSON.stringify(listadoPorHacer);
 
-    fs.writeFile(`db/data.json`, data, (err) => {
+    fs.writeFile('db/data.json', data, (err) => {
         if(err) throw new Error('No se pudo guardar', err);
     });
 }
@@ -29,18 +25,18 @@ const getListado = () => {
 
 const crear = (descripcion) => {
     cargarDB();
-    
+
     let index = listadoPorHacer.findIndex(tarea => tarea.descripcion === descripcion);
-    
+
     if(index >= 0) return false;
     else {
         let porHacer = {
             descripcion,
             completado: false
         };
-        
+
         listadoPorHacer.push(porHacer);
-        
+
         guardarDB();
         return porHacer;
     }
