@@ -16,3 +16,8 @@ y simplemente corra el archivo con el comando nodemon en vez de node
 ```
 $ nodemon archivo
 ```
+
+si quieren que se tome en cuenta algunos archivos en particular cuando se modifiquen pongan el argumento `-e` y los formatos en los que se fije
+```
+$ nodemon archivo -e js,hbs,htm,css
+```
