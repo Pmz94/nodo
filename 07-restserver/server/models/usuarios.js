@@ -22,15 +22,8 @@ let usuarioSchema = new Schema({
         type: String,
         required: [true, 'Contraseña obligatoria']
     },
-    img: {
-        type: String,
-        required: false
-    },
-    role: {
-        type: String,
-        default: 'USER_ROLE',
-        enum: rolesValidos
-    },
+    img: { type: String, required: false },
+    role: { type: String, default: 'USER_ROLE', enum: rolesValidos },
     estado: { type: Boolean, default: true },
     google: { type: Boolean, default: false }
 });

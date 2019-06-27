@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.send('Si');
 });
 
-mongoose.connect('mongodb://localhost:27017/cafe', { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
     if(err) throw err;
     console.log('Base de datos conectada');
 });
