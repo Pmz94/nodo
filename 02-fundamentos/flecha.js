@@ -12,23 +12,43 @@
 
 //console.log(saludar('Pedro'));
 
+let alias = superheroe => `${superheroe.nombre} alias ${superheroe.alias}`;
+
 let superheroes = {
     deadpool: {
-        nombre: 'Wade',
-        apellido: 'Winston',
-        poder: 'Regeneracion',
-        getNombre() {
-            return `${this.nombre} ${this.apellido} - poder: ${this.poder}`;
-        }
+        nombre: 'Wade Winston',
+        alias: 'Deadpool',
+        // getNombre() {
+        //     return alias(this);
+        // }
     },
     ironman: {
-        nombre: 'Tony',
-        apellido: 'Stark',
-        poder: 'Varios',
-        getNombre() {
-            return `${this.nombre} ${this.apellido} - poder: ${this.poder}`;
-        }
+        nombre: 'Tony Stark',
+        alias: 'Iron Man',
+        // getNombre: function() {
+        //     return alias(this);
+        // }
     },
+    hulk: {
+        nombre: 'Bruce Banner',
+        alias: 'HULK',
+        // getNombre: function() {
+        //     return alias(this);
+        // }
+    },
+    hawkeye: {
+        nombre: 'Clint Barton',
+        alias: 'Hawkeye',
+        // getNombre: function() {
+        //     return alias(this);
+        // }
+    }
 }
 
-console.log(superheroes.ironman.getNombre());
+for(let superheroe in superheroes) {
+    let obj_superheroe = superheroes[superheroe]; 
+    obj_superheroe.getNombre = function() {
+        return alias(this);
+    }
+    console.log(obj_superheroe.getNombre());
+}
