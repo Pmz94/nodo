@@ -1,16 +1,18 @@
 let getNombre = () => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve('Benny');
-        }, 3000);
+        if(new Date().getHours() <= 16) {
+            setTimeout(() => {
+                resolve('Benny');
+            }, 3000);
+        } else {
+            reject('Ya es tarde para esto');
+        }
     });
 };
 
-let saludo = async() => {
+let saludo = async () => {
     let nombre = await getNombre();
     return `Hola ${nombre}`;
 }
 
-saludo().then(mensaje => {
-    console.log(mensaje);
-});
+saludo().then(console.log).catch(console.error);
