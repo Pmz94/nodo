@@ -1,10 +1,10 @@
+03-bases-node/tablas/*
 03-bases-node/node_modules/
 03-bases-node/package-lock.json
-03-bases-node/tablas/*
 
+04-por-hacer/db/*
 04-por-hacer/node_modules/
 04-por-hacer/package-lock.json
-04-por-hacer/db/*
 
 05-clima-mundo/node_modules/
 05-clima-mundo/package-lock.json
@@ -15,4 +15,6 @@
 07-restserver/node_modules/
 07-restserver/package-lock.json
 
+node_modules/
+package-lock.json
 .idea
