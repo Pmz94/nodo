@@ -11,13 +11,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(require('./routes/usuario'));
+// configuracion global de rutas
+app.use(require('./routes/index'));
 
 app.get('/', (req, res) => {
-    res.send('Si');
+    res.send('07-restserver');
 });
 
-mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err, res) => {
     if(err) throw err;
     console.log('Base de datos conectada');
 });
