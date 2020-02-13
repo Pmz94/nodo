@@ -4,8 +4,8 @@
 	"scripts": {
 		"3": "nodemon 03-bases-node/app.js",
 		"4": "nodemon 04-por-hacer/app.js",
-		"5": "nodemon 05-clima-mundo/app.js",
-		"6": "nodemon 06-webserver/server.js",
+		"5": "nodemon 05-clima-mundo/app.js --direccion \"Los Angeles\"",
+		"6": "nodemon 06-webserver/server.js -e js,hbs,html,css",
 		"7": "nodemon 07-restserver/server/server.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
