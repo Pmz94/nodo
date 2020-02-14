@@ -6,7 +6,8 @@ process.env.PORT = process.env.PORT || 3000;
 // 60 minutos
 // 24 horas
 // 30 dias
-process.env.JWT_EXP = 60 * 60 * 24 * 30;
+// process.env.JWT_EXP = 60 * 60 * 24 * 30;
+process.env.JWT_EXP = '48h';
 
 // contraseña del token
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'secret';

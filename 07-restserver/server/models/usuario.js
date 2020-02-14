@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 let rolesValidos = {
-	values: ['USER_ROLE','ADMIN_ROLE'],
+	values: ['USER_ROLE', 'ADMIN_ROLE'],
 	message: '{VALUE} no es un rol valido',
 };
 
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 let usuarioSchema = new Schema({
 	nombre: {
@@ -39,4 +39,4 @@ usuarioSchema.plugin(uniqueValidator, {
 	message: 'Ya existe el campo {PATH} con el valor dado'
 });
 
-module.exports = mongoose.model('Usuarios', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);

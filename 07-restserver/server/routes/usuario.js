@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const Usuario = require('../models/usuarios');
+const Usuario = require('../models/usuario');
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 const app = express();
 
@@ -69,7 +69,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 	let id = req.params.id;
 	let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
-	Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
+	Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true, useFindAndModify: false }, (err, usuarioDB) => {
 		if(err) {
 			res.status(400).json({
 				status: false,

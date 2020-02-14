@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const _ = require('underscore');
-const Usuario = require('../models/usuarios');
+const Usuario = require('../models/usuario');
 const app = express();
 
 app.post('/login', (req, res) => {
