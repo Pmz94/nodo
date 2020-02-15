@@ -17,26 +17,21 @@ app.get('/usuario', verificaToken, (req, res) => {
 	let conds = { estado };
 
 	Usuario.find(conds, 'nombre email role estado google img')
-	.skip(desde)
-	.limit(limite)
-	.exec((err, usuarios) => {
-		if(err) {
-			res.status(400).json({
-				status: false,
-				message: err
-			});
-		}
+		.skip(desde)
+		.limit(limite)
+		.exec((err, usuarios) => {
+			if(err) return res.status(500).json({ ok: false, err });
 
-		Usuario.countDocuments(conds, (err, count) => {
-			res.json({
-				status: true,
-				limit: limite,
-				offset: desde,
-				count,
-				usuarios
+			Usuario.countDocuments(conds, (err, count) => {
+				res.json({
+					status: true,
+					limit: limite,
+					offset: desde,
+					count,
+					usuarios
+				});
 			});
 		});
-	});
 });
 
 app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
@@ -50,15 +45,10 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
 	});
 
 	usuario.save((err, usuarioDB) => {
-		if(err) {
-			res.status(400).json({
-				status: false,
-				message: err
-			});
-		}
+		if(err) return res.status(500).json({ ok: false, err });
 
 		res.json({
-			status: true,
+			ok: true,
 			message: 'Usuario creado',
 			usuario: usuarioDB
 		});
@@ -70,15 +60,10 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 	let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
 	Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true, useFindAndModify: false }, (err, usuarioDB) => {
-		if(err) {
-			res.status(400).json({
-				status: false,
-				message: err
-			});
-		}
+		if(err) return res.status(500).json({ ok: false, err });
 
 		res.json({
-			status: true,
+			ok: true,
 			message: 'Usuario modificado',
 			usuario: usuarioDB
 		});
@@ -87,22 +72,16 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
 // cambiar estado a false nomas
 /*app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
-    let id = req.params.id;
+	let id = req.params.id;
 
-    Usuario.findByIdAndUpdate(id, { $set: { estado: false }}, { new: true }, (err, usuarioDB) => {
-        if(err) {
-            res.status(400).json({
-                status: false,
-                message: err
-            });
-        }
+	Usuario.findByIdAndUpdate(id, { $set: { estado: false } }, { new: true }, (err, usuarioDB) => {
+		if(err) return res.status(500).json({ ok: false, err });
 
-        res.json({
-            status: true,
+		res.json({
+			ok: true,
 			message: 'Usuario Desactivado',
-            // usuario: usuarioDB
-        });
-    });
+		});
+	});
 });*/
 
 // borrar fisicamente el registro
@@ -110,22 +89,16 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 	let id = req.params.id;
 
 	Usuario.findByIdAndRemove(id, { useFindAndModify: false }, (err, usuarioBorrado) => {
-		if(err) {
-			res.status(400).json({
-				status: false,
-				message: err
-			});
-		}
+		if(err) return res.status(500).json({ ok: false, err });
 
 		if(usuarioBorrado) {
 			res.json({
-				status: true,
-				message: 'Usuario Borrado',
-				// usuario_borrado: usuarioBorrado
+				ok: true,
+				message: 'Usuario Borrado'
 			});
 		} else {
 			res.json({
-				status: false,
+				ok: false,
 				message: 'Usuario no encontrado'
 			});
 		}
