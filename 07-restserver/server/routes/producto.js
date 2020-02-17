@@ -45,6 +45,19 @@ app.get('/producto/:id', verificaToken, (req, res) => {
 	});
 });
 
+app.get('/producto/buscar/:termino', verificaToken, (req, res) => {
+	let termino = req.params.termino;
+
+	let regex = new RegExp(termino, 'i');
+
+	Producto.find({ nombre: regex })
+	.populate('categoria', 'descripcion')
+	.exec((err, productoDB) => {
+		if(err) return res.status(500).send({ ok: false, err });
+		res.send({ ok: true, productoDB });
+	});
+});
+
 app.post('/producto', verificaToken, (req, res) => {
 	let body = req.body;
 	let id_categoria = body.id_categoria;
@@ -79,10 +92,31 @@ app.put('/producto/:id', verificaToken, (req, res) => {
 	let id = req.params.id;
 	let { body } = req;
 
-	let descCategoria = {
+	Producto.findById(id, (err, productoDB) => {
+		if(err) return res.status(500).send({ ok: false, err });
+		if(!productoDB) return res.status(400).send({ ok: false, err: { meesage: 'Este producto no existe' } });
+
+		productoDB.nombre = body.nombre;
+		productoDB.precioUni = body.precioUni;
+		productoDB.descripcion = body.descripcion;
+		productoDB.disponible = body.disponible;
+		productoDB.id_categoria = body.id_categoria;
+
+		productoDB.save((err, productoModificado) => {
+			if(err) return res.status(500).send({ ok: false, err });
+
+			res.send({
+				ok: true,
+				message: 'Producto Modificado',
+				producto: productoModificado
+			});
+		});
+
+	});
+
+	/*let descCategoria = {
 		descripcion: body.descripcion
 	};
-
 	Producto.findByIdAndUpdate(id, descCategoria, { new: true, runValidators: true, useFindAndModify: false }, (err, productoDB) => {
 		if(err) return res.status(500).send({ ok: false, err });
 		if(!productoDB) return res.status(400).send({ ok: false, err });
@@ -92,7 +126,7 @@ app.put('/producto/:id', verificaToken, (req, res) => {
 			message: 'Producto modificado',
 			producto: productoDB
 		});
-	});
+	});*/
 });
 
 app.delete('/producto/:id', verificaToken, (req, res) => {

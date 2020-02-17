@@ -24,5 +24,8 @@
 		"mongoose-unique-validator": "^2.0.3",
 		"underscore": "^1.9.2",
 		"yargs": "^15.1.0"
+	},
+	"devDependencies": {
+		"nodemon": "latest"
 	}
 }
