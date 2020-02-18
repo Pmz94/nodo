@@ -20,10 +20,22 @@ let verificaAdmin_Role = (req, res, next) => {
 	else return res.send({ ok: false, err: { message: 'El usuario no es admin' } });
 };
 
+// Verificar token img
+let verificaTokenImg = (req, res, next) => {
+	let token = req.query.token;
+
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+		if(err) return res.status(401).send({ ok: false, err: { message: 'Token no valido', server_message: err } });
+
+		req.usuario = decoded.usuario;
+		next();
+	});
+};
+
 function parseJwt(token) {
 	let base64Url = token.split('.')[1];
 	let base64 = base64Url.replace('-', '+').replace('_', '/');
 	return JSON.parse(window.atob(base64));
 }
 
-module.exports = { verificaToken, verificaAdmin_Role };
+module.exports = { verificaToken, verificaAdmin_Role, verificaTokenImg };

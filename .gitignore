@@ -14,6 +14,8 @@
 
 07-restserver/node_modules/
 07-restserver/package-lock.json
+07-restserver/uploads/productos/*
+07-restserver/uploads/usuarios/*
 
 node_modules/
 package-lock.json
