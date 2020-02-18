@@ -5,15 +5,16 @@ const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
+const publicPath = path.resolve(__dirname, '../public');
+
+// habilitar carpeta public
+app.use(express.static(publicPath));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-
-// habilitar carpeta public
-app.use(express.static(path.resolve(__dirname, '../public')));
 
 // configuracion global de rutas
 app.use(require('./routes/index'));
@@ -23,6 +24,7 @@ mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: tru
 	console.log('Base de datos conectada');
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, err => {
+	if(err) throw new Error(err);
 	console.log(`Escuchando el puerto ${process.env.PORT}`);
 });
