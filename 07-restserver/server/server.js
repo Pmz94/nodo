@@ -25,6 +25,6 @@ mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: tru
 });
 
 app.listen(process.env.PORT, err => {
-	if(err) throw new Error(err);
-	console.log(`Escuchando el puerto ${process.env.PORT}`);
+	if(err) throw `Error de servidor: ${err}`;
+	console.log(`Escuchando en http://localhost:${process.env.PORT}`);
 });
